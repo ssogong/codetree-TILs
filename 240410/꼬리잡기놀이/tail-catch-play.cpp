@@ -24,6 +24,7 @@ int dy[4] = {1, 0, -1, 0};
 int arrowX = 1;
 int arrowY = 1;
 int arrowD = 0;
+int arrowFlag = 0;
 int ax[4] = {1, 0, -1, 0};
 int ay[4] = {0, 1, 0, -1};
 
@@ -170,19 +171,27 @@ void shoot() {
             visited[i][j] = 0;
         }
     }
-    cout << endl << personX << " "<< personY << endl;
-    result += get_point(personX, personY);
-    cout << result;
-
-
-
+    int tmp = get_point(personX, personY);
+    result += tmp * tmp;
     //change
+    int nx = arrowX + ax[arrowD];
+    int ny = arrowY + ay[arrowD];
+    if (nx == 0 || ny == 0 || nx == N+1 || ny == N+1) {
+        arrowD++;
+        if (arrowD == 4)
+            arrowD = 0;
+        return;
+    }
+    arrowX = nx;
+    arrowY = ny;
 }
 int main() {
     // 여기에 코드를 작성해주세요.
     get_input();
-    move();
-    shoot();
-    print_map();
+    while(K--) {
+        move();
+        shoot();
+    }
+    cout << result;
     return 0;
 }
