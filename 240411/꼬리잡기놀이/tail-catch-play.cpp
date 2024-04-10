@@ -67,24 +67,24 @@ void move() {
                 toY = ny;
                 break;
             }
-            if (map[nx][ny] == 3) {
-                for (int dd = 0; dd < 4; dd++) {
-                    int nnx = nx + dx[dd];
-                    int nny = ny + dy[dd];
-                    if (map[nnx][nny] == 2) {
-                        map[fromX][fromY] = 2;
-                        map[nx][ny] = 1;
-                        map[nnx][nny] = 3;
-                        line[i].startX = nx;
-                        line[i].startY = ny;
-                        line[i].endX = nnx;
-                        line[i].endY = nny;
-                        ifStartWithEnd = true;
-                        break;
-                    }
-                }
-                break;
-            }
+            // if (map[nx][ny] == 3) {
+            //     for (int dd = 0; dd < 4; dd++) {
+            //         int nnx = nx + dx[dd];
+            //         int nny = ny + dy[dd];
+            //         if (map[nnx][nny] == 2) {
+            //             map[fromX][fromY] = 2;
+            //             map[nx][ny] = 1;
+            //             map[nnx][nny] = 3;
+            //             line[i].startX = nx;
+            //             line[i].startY = ny;
+            //             line[i].endX = nnx;
+            //             line[i].endY = nny;
+            //             ifStartWithEnd = true;
+            //             break;
+            //         }
+            //     }
+            //     break;
+            // }
         }
         if (ifStartWithEnd)
             continue;
