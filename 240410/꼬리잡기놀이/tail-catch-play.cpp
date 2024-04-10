@@ -188,17 +188,6 @@ void shoot() {
     }
     int tmp = get_point(personX, personY);
     result += tmp * tmp;
-    //change
-    int nx = arrowX + ax[arrowD];
-    int ny = arrowY + ay[arrowD];
-    if (nx == 0 || ny == 0 || nx == N+1 || ny == N+1) {
-        arrowD++;
-        if (arrowD == 4)
-            arrowD = 0;
-        return;
-    }
-    arrowX = nx;
-    arrowY = ny;
 }
 int main() {
     // 여기에 코드를 작성해주세요.
@@ -206,6 +195,17 @@ int main() {
     while(K--) {
         move();
         shoot();
+        //change
+        int nx = arrowX + ax[arrowD];
+        int ny = arrowY + ay[arrowD];
+        if (nx == 0 || ny == 0 || nx == N+1 || ny == N+1) {
+            arrowD++;
+            if (arrowD == 4)
+                arrowD = 0;
+            continue;
+        }
+        arrowX = nx;
+        arrowY = ny;
     }
     cout << result;
     return 0;
