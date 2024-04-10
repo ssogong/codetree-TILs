@@ -93,7 +93,8 @@ void move() {
             continue;
         line[i].startX = toX;
         line[i].startY = toY;
-        while(map[fromX][fromY] != 4) {
+        bool ifIsTail = false;
+        while(!ifIsTail) {
             map[toX][toY] = map[fromX][fromY];
             for (int d = 0; d < 4; d++) {
                 int nx = fromX + dx[d];
@@ -101,6 +102,12 @@ void move() {
                 if (nx == toX && ny == toY)
                     continue;
                 if (map[nx][ny] > 0) {
+                    if (map[nx][ny] == 4) {
+                        ifIsTail = true;
+                        line[i].endX = toX;
+                        line[i].endY = toY;
+                        map[fromX][fromY] = 4;
+                    }
                     toX = fromX;
                     toY = fromY;
                     fromX = nx;
@@ -109,17 +116,14 @@ void move() {
                 }
             }
         }
-        line[i].endX = fromX;
-        line[i].endY = fromY;
-        map[toX][toY] = 4;
     }
 }
 
 int get_point(int x, int y) {
-    int score = 1;
     if (map[x][y] == 1)
         return 1;
     for (int i = 0; i < M; i++) {
+        int score = 1;
         int fromX = line[i].startX;
         int fromY = line[i].startY;
         while(1) {
@@ -131,8 +135,19 @@ int get_point(int x, int y) {
                 int ny = fromY + dy[d];
                 if (visited[nx][ny])
                     continue;
-                if (nx == x && ny == y)
+                if (nx == x && ny == y) {
+                    int tmpX = line[i].startX;
+                    int tmpY = line[i].startY;
+                    line[i].startX = line[i].endX;
+                    line[i].startY = line[i].endY;
+                    line[i].endX = tmpX;
+                    line[i].endY = tmpY;
+                    // cout << line[i].startX << " " << line[i].startY << endl;
+                    // cout << line[i].endX << " " << line[i].endY << endl;
+                    map[line[i].startX][line[i].startY] = 1;
+                    map[line[i].endX][line[i].endY] = 3;
                     return score;
+                }
                 if (map[nx][ny] == 3) {
                     ifIsTail = true;
                     break;
