@@ -14,9 +14,6 @@ struct Line {
 
 int N, M, K;
 int map[MAX_N][MAX_N];
-int visited[MAX_N][MAX_N];
-
-
 
 int dx[4] = {0, -1, 0, 1};
 int dy[4] = {1, 0, -1, 0};
@@ -124,6 +121,8 @@ int get_point(int x, int y) {
         int score = 1;
         int fromX = line[i].startX;
         int fromY = line[i].startY;
+        int oriX = fromX;
+        int oriY = fromY;
         if (x == fromX && y == fromY) {
             int tmpX = line[i].startX;
             int tmpY = line[i].startY;
@@ -136,11 +135,10 @@ int get_point(int x, int y) {
         while(1) {
             score++;
             bool ifIsTail = false;
-            visited[fromX][fromY] = 1;
             for (int d = 0; d < 4; d++) {
                 int nx = fromX + dx[d];
                 int ny = fromY + dy[d];
-                if (visited[nx][ny])
+                if (nx == oriX && ny == oriY)
                     continue;
                 if (nx == x && ny == y) {
                     int tmpX = line[i].startX;
@@ -160,6 +158,8 @@ int get_point(int x, int y) {
                     break;
                 }
                 if (map[nx][ny] == 2) {
+                    oriX = fromX;
+                    oriY = fromY;
                     fromX = nx;
                     fromY = ny;
                     break;
@@ -188,11 +188,7 @@ void shoot() {
     }
     if (!ifHasPerson)
         return;
-    for (int i = 0; i <= N + 1; i++) {
-        for (int j = 0; j <= N + 1; j++) {
-            visited[i][j] = 0;
-        }
-    }
+
     int tmp = get_point(personX, personY);
     result += tmp * tmp;
 }
