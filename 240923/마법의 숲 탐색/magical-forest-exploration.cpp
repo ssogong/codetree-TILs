@@ -94,7 +94,7 @@ int main() {
 			break;
 		}
 		// reset
-		if (nowX <= 0) {
+		if (nowX <= 1) {
 			clearMap();
 			continue;
 		}
