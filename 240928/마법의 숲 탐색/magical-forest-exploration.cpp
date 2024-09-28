@@ -6,7 +6,7 @@ int map[80][80];
 
 int R, C, K;
 
-int nodeC[1010];
+int nodeC[1100];
 int nodeD[1010];
 int nodeX[1010];
 int nodeY[1010];
