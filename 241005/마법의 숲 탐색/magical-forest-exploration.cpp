@@ -110,9 +110,9 @@ void down(int y, int x, int d, int id) {
 int main() {
     cin >> R >> C >> K;
     for (int id = 1; id <= K; id++) { // 골렘 번호 id
-        int x, d;
+        int d;
         cin >> node_C[id] >> d; // 골렘의 출발 x좌표, 방향 d를 입력받습니다
-        x = node_C[id];
+        int x = node_C[id];
         x--;
         down(0, x, d, id);
     }
