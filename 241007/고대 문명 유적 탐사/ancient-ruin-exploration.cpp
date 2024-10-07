@@ -201,10 +201,15 @@ bool try_find() {
 int main() {
     // 여기에 코드를 작성해주세요.
     get_input();
+    bool result_flag = false;
     for (int i = 0; i < K; i++) {
         if (try_find() == false)
             break;
+        cout << result << " ";
+        result = 0;
+        result_flag = true;
     }
-    cout << result << endl;
+    if (!result_flag)
+        cout << 0 << endl;
     return 0;
 }
