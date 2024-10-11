@@ -185,7 +185,7 @@ int main() {
     // 여기에 코드를 작성해주세요.
     getInput();
     //priintMap();
-    for (; TIME <= K + 1; TIME++) {
+    for (; TIME <= K; TIME++) {
         //priintMap();
         findMinMax();
         //cout << "min : " << minNodeX << " " << minNodeY << endl;
