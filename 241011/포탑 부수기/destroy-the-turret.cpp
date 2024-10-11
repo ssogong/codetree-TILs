@@ -61,8 +61,8 @@ void findMinMax() {
                 continue;
             if (map[i][j] == minVal) {
                 if (minNodeX != 0 &&
-                    (timeMap[i][j] < timeMap[minNodeX][minNodeY] ||
-                        i + j < minNodeX + minNodeY ||
+                    (timeMap[i][j] < timeMap[minNodeX][minNodeY] &&
+                        i + j < minNodeX + minNodeY &&
                         j < minNodeY))
                     continue;
                 minNodeX = i;
@@ -70,9 +70,9 @@ void findMinMax() {
             }
             if (map[i][j] == maxVal) {
                 if (maxNodeX != 0 &&
-                    (timeMap[i][j] < timeMap[maxNodeX][maxNodeY] ||
-                        i + j < maxNodeX + maxNodeY ||
-                        j < maxNodeY))
+                    (timeMap[i][j] > timeMap[maxNodeX][maxNodeY] &&
+                        i + j > maxNodeX + maxNodeY &&
+                        j > maxNodeY))
                     continue;
                 maxNodeX = i;
                 maxNodeY = j;
@@ -186,7 +186,7 @@ int main() {
     getInput();
     //priintMap();
     for (; TIME <= K; TIME++) {
-        //priintMap();
+        //cout << endl;  priintMap(); cout << endl;
         findMinMax();
         //cout << "min : " << minNodeX << " " << minNodeY << endl;
         //cout << "max : " << maxNodeX << " " << maxNodeY << endl;
