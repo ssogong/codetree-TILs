@@ -61,18 +61,18 @@ void findMinMax() {
                 continue;
             if (map[i][j] == minVal) {
                 if (minNodeX != 0 &&
-                    (timeMap[i][j] < timeMap[minNodeX][minNodeY] &&
-                        i + j < minNodeX + minNodeY &&
-                        j < minNodeY))
+                    ((timeMap[i][j] < timeMap[minNodeX][minNodeY]) ||
+                        (timeMap[i][j] == timeMap[minNodeX][minNodeY] && i + j < minNodeX + minNodeY) ||
+                        (timeMap[i][j] == timeMap[minNodeX][minNodeY] && i + j == minNodeX + minNodeY && j < minNodeY)))
                     continue;
                 minNodeX = i;
                 minNodeY = j;
             }
             if (map[i][j] == maxVal) {
                 if (maxNodeX != 0 &&
-                    (timeMap[i][j] > timeMap[maxNodeX][maxNodeY] &&
-                        i + j > maxNodeX + maxNodeY &&
-                        j > maxNodeY))
+                    ((timeMap[i][j] > timeMap[maxNodeX][maxNodeY]) ||
+                        (timeMap[i][j] == timeMap[maxNodeX][maxNodeY] && i + j > maxNodeX + maxNodeY) ||
+                        (timeMap[i][j] == timeMap[maxNodeX][maxNodeY] && i + j == maxNodeX + maxNodeY && j > maxNodeY)))
                     continue;
                 maxNodeX = i;
                 maxNodeY = j;
