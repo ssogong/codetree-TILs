@@ -60,19 +60,19 @@ void findMinMax() {
             if (map[i][j] == 0)
                 continue;
             if (map[i][j] == minVal) {
-                if (minNodeX == 0 ||
-                    timeMap[i][j] < timeMap[minNodeX][minNodeY] ||
-                    i + j < minNodeX + minNodeY ||
-                    j < minNodeY)
+                if (minNodeX != 0 &&
+                    (timeMap[i][j] < timeMap[minNodeX][minNodeY] ||
+                        i + j < minNodeX + minNodeY ||
+                        j < minNodeY))
                     continue;
                 minNodeX = i;
                 minNodeY = j;
             }
             if (map[i][j] == maxVal) {
-                if (maxNodeX == 0 ||
-                    timeMap[i][j] < timeMap[maxNodeX][maxNodeY] ||
-                    i + j < maxNodeX + maxNodeY ||
-                    j < maxNodeY)
+                if (maxNodeX != 0 &&
+                    (timeMap[i][j] < timeMap[maxNodeX][maxNodeY] ||
+                        i + j < maxNodeX + maxNodeY ||
+                        j < maxNodeY))
                     continue;
                 maxNodeX = i;
                 maxNodeY = j;
@@ -148,8 +148,8 @@ void cannonAttack() {
     if (map[maxNodeX][maxNodeY] < 0) map[maxNodeX][maxNodeY] = 0;
     power = power / 2;
     for (int d = 0; d < 8; d++) {
-        int nextX = maxNodeX + dx[d];
-        int nextY = maxNodeY + dy[d];
+        int nextX = maxNodeX + dx2[d];
+        int nextY = maxNodeY + dy2[d];
         getNextPos(nextX, nextY);
         if (nextX == minNodeX && nextY == minNodeY)
             continue;
@@ -170,15 +170,26 @@ void retire() {
     }
 }
 
+void printResult() {
+    int maxVal = 0;
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= M; j++) {
+            if (map[i][j] > maxVal)
+                maxVal = map[i][j];
+        }
+    }
+    cout << maxVal << endl;
+}
+
 int main() {
     // 여기에 코드를 작성해주세요.
     getInput();
-    priintMap();
+    //priintMap();
     for (; TIME <= K + 1; TIME++) {
         //priintMap();
         findMinMax();
-        cout << "min : " << minNodeX << " " << minNodeY << endl;
-        cout << "max : " << maxNodeX << " " << maxNodeY << endl;
+        //cout << "min : " << minNodeX << " " << minNodeY << endl;
+        //cout << "max : " << maxNodeX << " " << maxNodeY << endl;
         timeMap[minNodeX][minNodeY] = TIME;
         if (minNodeX == maxNodeX && minNodeY == maxNodeY)
             break;
@@ -194,17 +205,19 @@ int main() {
 
         bool successFlag = tryRazer();
         if (successFlag == true) {
-            priintMap();
+            //priintMap();
             retire();
-            priintMap();
-            cout << "-------------" << endl;
+            //priintMap();
+            //cout << "-------------" << endl;
             continue;
         }
         cannonAttack();
-        priintMap();
+        //priintMap();
         retire();
-        priintMap();
-        cout << "-------------" << endl;
+        //priintMap();
+        //cout << "-------------" << endl;
     }
+    printResult();
+
     return 0;
 }
